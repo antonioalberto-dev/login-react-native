@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Keyboard, View, KeyboardAvoidingView, Image, TextInput,
-  TouchableOpacity, Text, StyleSheet, Animated
+  View, KeyboardAvoidingView, Image, TextInput,
+  TouchableOpacity, Text, StyleSheet, Animated, Keyboard
 } from 'react-native';
 
 export default function App() {
 
   const [offset] = useState(new Animated.ValueXY({ x: 0, y: 80 }));
   const [opacity] = useState(new Animated.Value(0));
-  const [logo] = useState(new Animated.ValueXY({ x: 130, y: 155 }))
+  const [logo] = useState(new Animated.ValueXY({ x: 200, y: 225 }));
 
   useEffect(() => {
-    keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', keyboardDidShow);
-    keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', keyboardDidHide);
+
+    // keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', keyboardDidShow);
+    // keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', keyboardDidHide);
+
     Animated.parallel([
       Animated.spring(offset.y, {
         toValue: 0,
@@ -26,31 +28,31 @@ export default function App() {
     ]).start();
   }, []);
 
-  function keyboardDidShow() {
-    Animated.parallel([
-      Animated.timing(logo.x, {
-        toValue: 55,
-        duration: 100,
-      }),
-      Animated.timing(logo.y, {
-        toValue: 65,
-        duration: 100,
-      }),
-    ]).start();
-  }
+  // function keyboardDidShow() {
+  //   Animated.parallel([
+  //     Animated.timing(logo.x, {
+  //       toValue: 55,
+  //       duration: 100,
+  //     }),
+  //     Animated.timing(logo.y, {
+  //       toValue: 65,
+  //       duration: 100,
+  //     }),
+  //   ]).start();
+  // }
 
-  function keyboardDidHide() {
-    Animated.parallel([
-      Animated.timing(logo.x, {
-        toValue: 130,
-        duration: 100,
-      }),
-      Animated.timing(logo.y, {
-        toValue: 155,
-        duration: 100,
-      }),
-    ]).start();
-  }
+  // function keyboardDidHide() {
+  //   Animated.parallel([
+  //     Animated.timing(logo.x, {
+  //       toValue: 130,
+  //       duration: 100,
+  //     }),
+  //     Animated.timing(logo.y, {
+  //       toValue: 155,
+  //       duration: 100,
+  //     }),
+  //   ]).start();
+  // }
 
   return (
     <>
@@ -96,7 +98,7 @@ export default function App() {
 
           <TouchableOpacity style={styles.btnRegister}>
             <Text style={styles.textRegister}>
-              Criar conta gratuita
+              Ainda não é cadastrado? Clique aqui!
             </Text>
           </TouchableOpacity>
         </Animated.View>
@@ -110,7 +112,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    background: '#191919'
+    background: '#f0f0f0'
   },
   containerLogo: {
     flex: 1,
@@ -150,6 +152,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   textRegister: {
-    color: '#fff',
+    color: '#000',
   }
 })
